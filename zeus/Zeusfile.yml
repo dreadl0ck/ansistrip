@@ -1,0 +1,12 @@
+commands:
+  clean:
+    description: clean up the mess
+    exec: rm -rf bin/*
+  build:
+    dependencies: clean
+    description: built the commandline tool
+    exec: go build -o bin/ansistrip c0de/ansistrip/cmd
+  install:
+    dependencies: build
+    description: install binary to $GOBIN
+    exec: cp -f bin/ansistrip $GOBIN

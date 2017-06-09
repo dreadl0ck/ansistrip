@@ -1,0 +1,21 @@
+BuildNumber: 0
+Deadline: ""
+Milestones: []
+Aliases: {}
+Events:
+  6dbfc890145ee126:
+    name: zeusfile watcher
+    id: 6dbfc890145ee126
+    path: zeus/Zeusfile.yml
+    op: 2
+    fileextension: ""
+    command: internal
+  53682c66bc7beb85:
+    name: config watcher
+    id: 53682c66bc7beb85
+    path: zeus/config.yml
+    op: 2
+    fileextension: .yml
+    command: internal
+Author: ""
+KeyBindings: {}
