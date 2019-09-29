@@ -65,7 +65,8 @@ func NewAtomic(w io.Writer) *AtomicAnsiStripper {
 func (as *AtomicAnsiStripper) Write(b []byte) (n int, err error) {
 	as.mutex.Lock()
 	defer as.mutex.Unlock()
-	return as.w.Write(StripAnsi(b))
+	_, e := as.w.Write(StripAnsi(b))
+	return len(b), e
 }
 
 // StripAnsi removes all ANSI Escape Sequences from the byteslice
