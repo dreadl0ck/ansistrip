@@ -17,7 +17,6 @@
 package ansistrip
 
 import (
-	"fmt"
 	"io"
 	"regexp"
 	"sync"
@@ -44,8 +43,9 @@ func New(w io.Writer) *AnsiStripper {
 }
 
 // Write implements the io.Writer interface
-func (as *AnsiStripper) Write(b []byte) (n int, err error) {
-	return as.w.Write(StripAnsi(b))
+func (as *AnsiStripper) Write(b []byte) (int, error) {
+	_, err := as.w.Write(StripAnsi(b))
+	return len(b), err
 }
 
 // AtomicAnsiStripper is thread safe
@@ -63,11 +63,10 @@ func NewAtomic(w io.Writer) *AtomicAnsiStripper {
 }
 
 // Write implements the io.Writer interface
-func (as *AtomicAnsiStripper) Write(b []byte) (n int, err error) {
+func (as *AtomicAnsiStripper) Write(b []byte) (int, error) {
 	as.mutex.Lock()
 	defer as.mutex.Unlock()
 	_, e := as.w.Write(StripAnsi(b))
-	fmt.Println(e)
 	return len(b), e
 }
 
