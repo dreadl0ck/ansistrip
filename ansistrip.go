@@ -17,6 +17,7 @@
 package ansistrip
 
 import (
+	"fmt"
 	"io"
 	"regexp"
 	"sync"
@@ -66,6 +67,7 @@ func (as *AtomicAnsiStripper) Write(b []byte) (n int, err error) {
 	as.mutex.Lock()
 	defer as.mutex.Unlock()
 	_, e := as.w.Write(StripAnsi(b))
+	fmt.Println(e)
 	return len(b), e
 }
 
